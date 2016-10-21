@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html ng-app="angApp">
+
+<head>
+    <meta charset="utf-8">
+    <title>Angular App</title>
+    <script src="https://code.angularjs.org/1.5.7/angular.js"></script>
+    <script src="app.js"></script>
+</head>
+
+<body ng-controller="mainController">
+  <h1>Camera Shop</h1>
+  <br>
+    <select name="singleSelect" ng-model="data.singleSelect">
+      <option value="option-1">Rating</option>
+      <option value="option-2">Price</option>
+    </select>
+      <br>
+      <div ng-repeat="camera in cameraArray">
+          <ul>{{camera.title}}| {{camera.price}}|{{camera.rating}}| <img ng-src="{{camera.image}}"/>
+          </ul>
+      </div>
+</body>
+
+</html>
