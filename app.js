@@ -23,4 +23,28 @@ app.controller('mainController', ['$scope', function($scope){
     price: 3796.95,
     onSale: true
   }]
+
+  $scope.totalCost = 0;
+  $scope.currentItems = [];
+
+  // "private" data, cannot be accessed by the view.
+  var taxRate = .18;
+
+  // "public" function, can be accessed from the view.
+  $scope.addItem = function (camera) {
+    $scope.currentItems.push(camera);
+    updatePrice();
+  }
+
+  // "private" function, cannot be accessed by the view.
+  function updatePrice() {
+    var sum = 0;
+    for(var i = 0; i < $scope.currentItems.length; i++) {
+      sum += $scope.currentItems[i].price;
+    }
+
+    $scope.totalCost = sum + (sum * taxRate);
+      $scope.totalCost = Math.floor($scope.totalCost);
+      console.log($scope.totalCost);
+  }
 }])

@@ -4,27 +4,39 @@
 <head>
     <meta charset="utf-8">
     <title>Angular App</title>
-    <link rel="stylesheet" href = "style.css"/>
+    <link rel="stylesheet" href="style.css" />
     <script src="https://code.angularjs.org/1.5.7/angular.js"></script>
     <script src="app.js"></script>
 </head>
 
 <body ng-controller="mainController">
-  <h1>Camera Shop</h1>
-  <br>
+    <h1>Camera Shop</h1>
+    <br>
     <select name="singleSelect" ng-model="sort">
-      <option value="rating">Rating</option>
-      <option value="price">Price</option>
+        <option value="rating">Rating</option>
+        <option value="price">Price</option>
     </select>
-      <br>
-  <div ng-repeat="camera in cameraArray | orderBy: sort">
-    <ul><div ng-class='{title: camera.title}'>{{camera.title}}</div>
-        <div ng-class="{onSale: camera.onSale == true}" ng-show ="camera.onSale == true">price: {{camera.price | currency}} ON SALE!!</div>
-        <div ng-show='camera.onSale == false'> price: {{camera.price | currency}}</div>
-        <div> rating: {{camera.rating}}</div>
-        <img class="image" ng-src="{{camera.image}}">
-    </ul>
-      </div>
+    <br>
+    <div ng-repeat="camera in cameraArray | orderBy: sort">
+        <ul>
+            <div ng-class='{title: camera.title}'>{{camera.title}}</div>
+            <div ng-class="{onSale: camera.onSale == true}" ng-show="camera.onSale == true">price: {{camera.price | currency}} ON SALE!!</div>
+            <div ng-show='camera.onSale == false'> price: {{camera.price | currency}}</div>
+            <div> rating: {{camera.rating}}</div>
+            <img class="image" ng-src="{{camera.image}}">
+            <button ng-click="addItem(camera)">Add To Cart</button>
+        </ul>
+    </div>
+    <div>
+        <h3> In your shopping cart: </h3>
+        <ul>
+            <li ng-repeat="camera in currentItems track by $index">
+                {{camera.title}}, {{camera.price | currency}}
+            </li>
+        </ul>
+        <h5> Total Cost: </h5>
+        <span>{{totalCost | currency}}</span>
+    </div>
 </body>
 
 </html>
